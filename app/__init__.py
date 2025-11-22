@@ -1,0 +1,1 @@
+"""Geomag API application package."""
