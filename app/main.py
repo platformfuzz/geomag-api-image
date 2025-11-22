@@ -3,6 +3,7 @@ import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 
@@ -30,6 +31,17 @@ app = FastAPI(
 # Add response compression for large responses
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
+# Add CORS support for web container
+web_origin = os.getenv("WEB_ORIGIN", "*")
+allow_origins = [web_origin] if web_origin != "*" else ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allow_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Include routers
 app.include_router(discovery.router)
