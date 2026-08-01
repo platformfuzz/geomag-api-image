@@ -3,7 +3,7 @@ uvicorn[standard]>=0.24.0
 httpx>=0.25.0
 cachetools>=7.1.6
 pydantic>=2.13.4
-pydantic-settings>=2.1.0
+pydantic-settings>=2.14.2
 
 # Test dependencies
 pytest>=7.4.0
